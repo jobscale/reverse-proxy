@@ -6,7 +6,7 @@ const httpProxy = require('http-proxy');
 const { logger } = require('@jobscale/logger');
 
 const { BACKEND, HEADERS } = process.env;
-const target = BACKEND;
+const backend = BACKEND;
 
 const proxy = httpProxy.createProxyServer({ xfwd: true });
 
@@ -84,6 +84,38 @@ class App {
     });
   }
 
+  pathAll(req, res, route, target, uri) {
+    if (route.startsWith(`GET ${uri}`)) {
+      proxy.web(req, res, { target });
+      return true;
+    }
+    if (route.startsWith(`POST ${uri}`)) {
+      proxy.web(req, res, { target });
+      return true;
+    }
+    if (route.startsWith(`PUT ${uri}`)) {
+      proxy.web(req, res, { target });
+      return true;
+    }
+    if (route.startsWith(`DELETE ${uri}`)) {
+      proxy.web(req, res, { target });
+      return true;
+    }
+    if (route.startsWith(`PATCH ${uri}`)) {
+      proxy.web(req, res, { target });
+      return true;
+    }
+    if (route.startsWith(`OPTIONS ${uri}`)) {
+      proxy.web(req, res, { target });
+      return true;
+    }
+    if (route.startsWith(`HEAD ${uri}`)) {
+      proxy.web(req, res, { target });
+      return true;
+    }
+    return false;
+  }
+
   router(req, res) {
     const headers = new Headers(req.headers);
     if (HEADERS) {
@@ -107,34 +139,7 @@ class App {
     const route = `${method} ${pathname}`;
     logger.debug({ route, searchParams });
 
-    if (route.startsWith('GET /')) {
-      proxy.web(req, res, { target });
-      return;
-    }
-    if (route.startsWith('POST /')) {
-      proxy.web(req, res, { target });
-      return;
-    }
-    if (route.startsWith('PUT /')) {
-      proxy.web(req, res, { target });
-      return;
-    }
-    if (route.startsWith('DELETE /')) {
-      proxy.web(req, res, { target });
-      return;
-    }
-    if (route.startsWith('PATCH /')) {
-      proxy.web(req, res, { target });
-      return;
-    }
-    if (route.startsWith('OPTIONS /')) {
-      proxy.web(req, res, { target });
-      return;
-    }
-    if (route.startsWith('HEAD /')) {
-      proxy.web(req, res, { target });
-      return;
-    }
+    if (this.pathAll(req, res, route, backend, '/')) return;
 
     this.notfoundHandler(req, res);
   }
@@ -156,7 +161,7 @@ class App {
     const upgrade = headers.get('upgrade');
     logger.info({ url: req.url, upgrade });
     if (req.url.startsWith('/')) {
-      proxy.ws(req, socket, head, { target });
+      proxy.ws(req, socket, head, { target: backend });
       return;
     }
     socket.destroy();
