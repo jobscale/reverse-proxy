@@ -1,11 +1,7 @@
 FROM node:lts-trixie-slim
 WORKDIR /home/node
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  ca-certificates apt-transport-https curl \
- && apt-get clean && rm -fr /var/lib/apt/lists/*
-RUN curl -sL jsx.jp/s/stable | bash \
- && apt-get clean && rm -fr /var/lib/apt/lists/*
+RUN chmod u+s,o+x $(which apt)
 USER node
 COPY --chown=node:staff package.json .
 RUN npm i --omit=dev
