@@ -14,14 +14,14 @@
     "test": "date -Iseconds && npm run lint"
   },
   "dependencies": {
-    "@jobscale/logger": "^0.8.4",
+    "@jobscale/logger": "^0.10.1",
     "http-errors": "^2.0.1",
     "http-proxy": "^1.18.1"
   },
   "devDependencies": {
-    "@jobscale/eslint-plugin-standard": "^0.0.2",
+    "@jobscale/eslint-plugin-standard": "^0.0.3",
     "eslint": "^9.39.1",
-    "eslint-plugin-jest": "^29.2.0",
+    "eslint-plugin-jest": "^29.2.1",
     "pre-commit": "^1.2.2"
   }
 }
