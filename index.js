@@ -1,8 +1,8 @@
-const http = require('http');
-const { logger } = require('@jobscale/logger');
-const { app, upgradeHandler, errorHandler } = require('./app');
+import http from 'http';
+import { logger } from '@jobscale/logger';
+import { app, upgradeHandler, errorHandler } from './app/index.js';
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number.parseInt(process.env.PORT, 10) || 3000;
 
 const main = async () => {
   const server = http.createServer(app);
@@ -21,6 +21,4 @@ const main = async () => {
   return app;
 };
 
-module.exports = {
-  server: main(),
-};
+export default main();

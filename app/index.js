@@ -1,9 +1,9 @@
-const os = require('os');
-const path = require('path');
-const fs = require('fs');
-const createHttpError = require('http-errors');
-const httpProxy = require('http-proxy');
-const { logger } = require('@jobscale/logger');
+import os from 'os';
+import path from 'path';
+import fs from 'fs';
+import createHttpError from 'http-errors';
+import httpProxy from 'http-proxy';
+import { logger } from '@jobscale/logger';
 
 const { BACKEND, HEADERS } = process.env;
 const backend = BACKEND;
@@ -189,6 +189,7 @@ class App {
   }
 }
 
-const app = new App();
-app.app = app.start();
-module.exports = app;
+const instance = new App();
+instance.app = instance.start();
+export const { app, upgradeHandler, errorHandler } = instance;
+export default instance;
