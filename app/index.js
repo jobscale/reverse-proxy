@@ -39,7 +39,7 @@ class App {
     if (!fs.existsSync(file.path)) return false;
     const mime = filePath => {
       const ext = path.extname(filePath).toLowerCase();
-      if (['.png', '.jpeg', '.webp', '.gif'].includes(ext)) return `image/${ext}`;
+      if (['.png', '.jpeg', '.webp', '.gif'].includes(ext)) return `image/${ext.slice(1)}`;
       if (['.jpg'].includes(ext)) return 'image/jpeg';
       if (['.ico'].includes(ext)) return 'image/x-ico';
       if (['.json'].includes(ext)) return 'application/json';
