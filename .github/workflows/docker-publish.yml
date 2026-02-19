@@ -33,9 +33,6 @@ jobs:
         - name: regular
           irregular: ''
           docker_file: Dockerfile
-        - name: bookworm
-          irregular: 'bookworm'
-          docker_file: bookworm/Dockerfile
 
     permissions:
       contents: read
