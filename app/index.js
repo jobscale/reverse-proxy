@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import createHttpError from 'http-errors';
 import httpProxy from 'http-proxy';
-import { logger } from '@jobscale/logger';
+import { logger } from '@jobscale/create-logger';
 
 const { BACKEND, HEADERS } = process.env;
 const backend = BACKEND;

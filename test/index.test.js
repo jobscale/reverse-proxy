@@ -29,7 +29,7 @@ jest.unstable_mockModule('http-proxy', () => ({
   },
 }));
 
-jest.unstable_mockModule('@jobscale/logger', () => ({
+jest.unstable_mockModule('@jobscale/create-logger', () => ({
   logger: {
     info: jest.fn(),
     error: jest.fn(),
@@ -39,7 +39,7 @@ jest.unstable_mockModule('@jobscale/logger', () => ({
 
 const fs = await import('fs');
 const httpProxy = await import('http-proxy');
-const { logger } = await import('@jobscale/logger');
+const { logger } = await import('@jobscale/create-logger');
 const { default: appInstance, app, upgradeHandler, errorHandler } = await import('../app/index.js');
 
 describe('Reverse Proxy App', () => {

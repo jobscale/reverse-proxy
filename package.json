@@ -1,6 +1,7 @@
 {
+  "private": true,
   "name": "reverse-proxy",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "reverse-proxy",
   "keywords": [],
   "author": "jobscale",
@@ -11,11 +12,12 @@
   "scripts": {
     "start": "node index.js",
     "pretest": "date -Iseconds",
+    "posttest": "npm run lint",
     "lint": "eslint",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --coverage --collectCoverage"
   },
   "dependencies": {
-    "@jobscale/logger": "^0.10.1",
+    "@jobscale/create-logger": "^1.0.5",
     "http-errors": "^2.0.1",
     "http-proxy": "^1.18.1"
   },
